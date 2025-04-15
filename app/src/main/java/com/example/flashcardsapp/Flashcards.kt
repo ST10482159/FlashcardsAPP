@@ -27,7 +27,8 @@ class Flashcards : ComponentActivity() {
                     onClick = {
                         val next = Intent(this@Flashcards, MainActivity::class.java)
                         startActivity(next)
-                    
+
+                        
                     }) {
                     
                     Text(text = "back")
