@@ -30,11 +30,16 @@ class MainActivity : ComponentActivity() {
                         // Runs when button clicked
                         val next =Intent(this@MainActivity, Flashcards::class.java)
                         startActivity(next)
-                    
+                        Button(onClick = {
+
+                        }) {
+
+                        }
                     })
                 
                 {
                     Text(text = "start")
+
                 }
                 
                 

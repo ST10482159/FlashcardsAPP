@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Flashcards APP</string>
     <string name="title_activity_flashcards">Flashcards</string>
+    <string name="title_activity_flash_questions">flashQuestions</string>
 </resources>
