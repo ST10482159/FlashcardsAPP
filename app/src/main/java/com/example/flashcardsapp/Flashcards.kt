@@ -16,29 +16,36 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.flashcardsapp.ui.theme.FlashcardsAPPTheme
 
 class Flashcards : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        var questions = arrayOf("question 1 - south Africa is the only country in the world that has the national flower ,the king protea",
+            " question 2- The great wall of china is located in south africa ",
+            "question 3- The san people were early inhabitants of south africa and they are famous for their rock art  ",
+            "question 4-The apartheid era in south africa lasted from 1948 to 1994 ",
+            "question 5- Julius caesar was the first emperor of Rome")
+
+        // Array of correct answers for each questions
+
+        var answers = arrayOf("true" ,"false","true","true","false")
+
+        var index = 0
+        var score = 0
+
         super.onCreate(savedInstanceState)
         setContent {
-            var questions = arrayOf("question 1 - The pyramids of egypt were built as tombs for pharaoh",
-                " question 2- The roman empire was known for its advanced engineering and infrastructure",
-                "question 3- The russian revolution led to establishment of a communist  goverment in Russia   ",
-                "question 4-The cold war was a geopolitical conflict between the united states and the sovient union  ",
-                "question 5- World war I was a global conflict that began at 1914")
 
-            var answers = arrayOf("true" ,"false","true","true","true")
-            var index = 0
-            var score = 0
-            var display by remember{
-                mutableStateOf(questions[index])
+
+
+            var questionDisplay by remember {
+                mutableStateOf(questions[0])
             }
-            var currentQuestion by remember {
-                mutableStateOf(questions[index])
-            }
+            //feedback for user responses
             var feedback by remember {
                 mutableStateOf("")
             }
@@ -46,16 +53,31 @@ class Flashcards : ComponentActivity() {
 
 
 
-            Column {
+            Column(modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = "Flashcards")
 
-                Text(text = display)
+                //display current questions
 
-                Text(text = "Score: "+ score)
+                Text(text = questionDisplay)
+
+                Text(text = feedback)
+
+                Text(text = "Score: $score /5")
 
                 Row {
-                    Button(onClick =
-                    {
+                    Button(onClick ={
+                        if (answers[index]=="True") {
+                            score++
+                            feedback=  "Correct"
+
+                        }
+                        else{
+                            feedback= "Incorrect"
+                        }
+
+
+
 
 
                     }) {
@@ -65,6 +87,15 @@ class Flashcards : ComponentActivity() {
 
                     }
                     Button(onClick = {
+                        if (answers[index]=="false") {
+                            score++
+                            feedback="correct"
+
+                        }
+                        else{
+                            feedback="Incorrect"
+                        }
+
 
                     }) {
 
@@ -72,19 +103,24 @@ class Flashcards : ComponentActivity() {
 
                     }
 
+                    //Button move to the next question
+
                 }
                 Button(
                     onClick = {
 
                         if (index < questions.size-1){
                             index++
-                            currentQuestion =questions[index]
+                            // Update the current question being displayed
+                            questionDisplay =questions[index]
                             feedback= ""
+
                         }else{
                             val next =Intent(this@Flashcards, flashQuestions::class.java)
                             next.putExtra("score",score)
                             startActivity(next)
                         }
+
 
                 }) {
                     Text(text = "NEXT")

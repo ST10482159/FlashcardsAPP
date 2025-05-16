@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.flashcardsapp.ui.theme.FlashcardsAPPTheme
@@ -19,34 +20,28 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            
-            Column {
+
+            Column(modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(text = " history flashcards")
-                
+
                 Text(text = "Press the button to begin the history questions ")
-                
+
                 Button(
                     onClick = {
                         // Runs when button clicked
-                        val next =Intent(this@MainActivity, Flashcards::class.java)
+                        val next = Intent(this@MainActivity, Flashcards::class.java)
                         startActivity(next)
-                        Button(onClick = {
 
-                        }) {
 
-                        }
-                    })
-                
-                {
-                    Text(text = "start")
-
+                    }) {
+                    Text(text = "Start")
                 }
-                
-                
-                
-                
+
+
             }
-            
+
         }
     }
 }
